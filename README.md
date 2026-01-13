@@ -56,23 +56,44 @@ This replaces heuristic models with **data-driven physics learning**.
 ## 📂 Repository Structure
 
 ```
-├── data/
-│   ├── dataset.xlsx            # Real battery test data
-│   ├── synthetic_profiles.py   # Synthetic load generation
+batteryguard-ai/
 │
-├── notebooks/
-│   ├── eda.ipynb               # Exploratory Data Analysis
+├── data/
+│   ├── raw/
+│   ├── processed/
+│
+├── preprocessing/
+│   ├── signal_cleaning.py
+│   ├── cycle_extraction.py
+│
+├── features/
+│   ├── load_shape_features.py   # C1–C4
 │
 ├── models/
-│   ├── ml_models.py            # Regression & clustering models
-│   ├── deeponet.py             # DeepONet implementation
+│   ├── stress_deeponet.py
+│   ├── degradation_ml.py
+│   ├── anomaly_models.py
+│   ├── rul_models.py
+│
+├── xai/
+│   ├── shap_analysis.py
+│   ├── stress_attribution.py
+│
+├── safety/
+│   ├── early_warning.py
+│   ├── risk_scoring.py
+│
+├── analytics/
+│   ├── cell_pack_loss.py
+│   ├── reporting.py
 │
 ├── chatbot/
-│   ├── chatbot.py              # Rule-based analytics chatbot
+│   ├── assistant.py
 │
-├── main.py                     # End-to-end pipeline
-├── requirements.txt
-├── README.md
+├── main.py
+├── config.yaml
+└── README.md  
+
 ```
 
 ---
