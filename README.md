@@ -1,6 +1,6 @@
 # Green-Skills-AI-Internship-Project
 
-# 🔋 Path-Dependent Energy Stress Modeling for Lithium-Ion Battery Packs
+#  Path-Dependent Energy Stress Modeling for Lithium-Ion Battery Packs
 
 An **end-to-end, research-grade AI project** that models **battery degradation as a path-dependent functional problem**, moving beyond traditional cycle-counting approaches.
 
@@ -8,11 +8,11 @@ This repository integrates **data science, machine learning, functional deep lea
 
 ---
 
-## 🚀 Project Overview
+##  Project Overview
 
 Traditional battery aging models assume degradation depends on *how much* energy flows through a battery. In reality, degradation depends on *how* energy flows **over time**.
 
-> ⚠️ Same Ah ≠ Same Damage
+>  Same Ah ≠ Same Damage
 
 High-frequency current fluctuations, spikes, and pulsed loads degrade batteries faster—even when total energy is identical.
 
@@ -25,7 +25,7 @@ This project introduces a **Stress Functional Learning Framework** that:
 
 ---
 
-## 🎯 Objectives
+##  Objectives
 
 * Replace **cycle counting** with **stress-based degradation modeling**
 * Learn degradation physics directly from data
@@ -35,7 +35,7 @@ This project introduces a **Stress Functional Learning Framework** that:
 
 ---
 
-## 🧠 Core Concept
+##  Core Concept
 
 Battery degradation is modeled as a **functional**:
 
@@ -53,7 +53,7 @@ This replaces heuristic models with **data-driven physics learning**.
 
 ---
 
-## 📂 Repository Structure
+##  Repository Structure
 
 ```
 batteryguard-ai/
@@ -98,7 +98,7 @@ batteryguard-ai/
 
 ---
 
-## 📊 Dataset Description
+##  Dataset Description
 
 ### Real Data (EV Lab)
 
@@ -123,7 +123,7 @@ Used when real data is incomplete:
 
 ---
 
-## 🧹 Data Preprocessing
+##  Data Preprocessing
 
 * Missing value handling
 * Time-series resampling
@@ -134,7 +134,7 @@ Used when real data is incomplete:
 
 ---
 
-## 🧪 Feature Engineering (Load Shape Toxicity)
+##  Feature Engineering (Load Shape Toxicity)
 
 Each cycle is summarized using **four physically meaningful coefficients**:
 
@@ -149,7 +149,7 @@ These features feed ML models and support interpretability.
 
 ---
 
-## 📈 Exploratory Data Analysis (EDA)
+##  Exploratory Data Analysis (EDA)
 
 Performed analyses include:
 
@@ -164,7 +164,7 @@ Performed analyses include:
 
 ---
 
-## 🤖 Machine Learning Models
+##  Machine Learning Models
 
 ### Regression
 
@@ -181,7 +181,7 @@ Used to predict capacity loss (`ΔCapacity`):
 
 ---
 
-## 🧬 Deep Learning: Neural Operator (DeepONet)
+##  Deep Learning: Neural Operator (DeepONet)
 
 ### Why DeepONet?
 
@@ -215,7 +215,7 @@ Ensures:
 
 ---
 
-## ⚡ Stress & Safety Modeling
+##  Stress & Safety Modeling
 
 For each cycle:
 
@@ -223,14 +223,14 @@ For each cycle:
 * Equivalent Stress Cycle (ESC) is computed
 * Cycles are classified as:
 
-  * ✅ Safe
-  * ⚠️ Dangerous
+  *  Safe
+  *  Dangerous
 
 Thresholding uses percentile-based stress limits.
 
 ---
 
-## 🧠 AI Chatbot Interface
+##  AI Chatbot Interface
 
 A lightweight analytics chatbot enables natural queries:
 
@@ -245,7 +245,7 @@ Demonstrates AI-powered battery analytics.
 
 ---
 
-## 🧰 Tech Stack
+##  Tech Stack
 
 ### Programming & Data
 
@@ -273,7 +273,7 @@ Demonstrates AI-powered battery analytics.
 
 ---
 
-## 📌 Key Findings
+##  Key Findings
 
 1. Battery stress is **path-dependent**, not cycle-dependent
 2. High `dI/dt` causes disproportionate damage
@@ -283,7 +283,7 @@ Demonstrates AI-powered battery analytics.
 
 ---
 
-## 🌍 Applications
+##  Applications
 
 * Electric Vehicle Battery Management Systems (BMS)
 * Smart charging optimization
@@ -294,7 +294,7 @@ Demonstrates AI-powered battery analytics.
 
 ---
 
-## 🏁 Final Statement
+##  Final Statement
 
 This project demonstrates a **next-generation AI framework** for lithium-ion battery degradation modeling by:
 
@@ -306,7 +306,7 @@ This project demonstrates a **next-generation AI framework** for lithium-ion bat
 
 ---
 
-## 📌 Future Work
+##  Future Work
 
 * Multi-physics coupling (thermal + electrochemical)
 * Transformer-based sequence models
@@ -315,4 +315,4 @@ This project demonstrates a **next-generation AI framework** for lithium-ion bat
 
 ---
 
-⭐ If you find this project useful, consider starring the repository.
+ If you find this project useful, consider starring the repository.
