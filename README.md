@@ -1,4 +1,3 @@
-```markdown
 # Green-Skills AI Internship Project  
 ## Path-Dependent Energy Stress Modeling for Lithium-Ion Battery Packs
 
