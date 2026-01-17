@@ -1,318 +1,328 @@
-# Green-Skills-AI-Internship-Project
+# Green-Skills AI Internship Project  
+## Path-Dependent Energy Stress Modeling for Lithium-Ion Battery Packs
 
-#  Path-Dependent Energy Stress Modeling for Lithium-Ion Battery Packs
+An end-to-end, research-grade AI framework that models lithium-ion battery
+degradation as a **path-dependent functional learning problem**, moving
+beyond traditional cycle-counting and energy-throughput approaches.
 
-An **end-to-end, research-grade AI project** that models **battery degradation as a path-dependent functional problem**, moving beyond traditional cycle-counting approaches.
-
-This repository integrates **data science, machine learning, functional deep learning (DeepONet), and AI-driven analytics** to quantify battery stress based on **current waveform shape**, not just energy usage.
+This repository integrates **data science, machine learning, functional deep
+learning (DeepONet), explainability, and AI-driven analytics** to quantify
+battery stress based on *how* energy flows through a battery—not just how
+much.
 
 ---
 
-##  Project Overview
+## 🔬 Project Motivation
 
-Traditional battery aging models assume degradation depends on *how much* energy flows through a battery. In reality, degradation depends on *how* energy flows **over time**.
+Traditional battery aging models assume:
 
->  Same Ah ≠ Same Damage
+> Same energy throughput ⇒ Same degradation
 
-High-frequency current fluctuations, spikes, and pulsed loads degrade batteries faster—even when total energy is identical.
+This assumption is fundamentally flawed.
+
+**Same Ah ≠ Same Damage**
+
+High-frequency current fluctuations, sharp spikes, and pulsed loads degrade
+batteries faster—even when total energy usage is identical.
 
 This project introduces a **Stress Functional Learning Framework** that:
 
-* Learns degradation directly from **I(t)** and **dI/dt**
-* Identifies **toxic load shapes**
-* Predicts **capacity fade and stress per cycle**
-* Creates a **Safe vs Dangerous operating envelope**
+- Learns degradation directly from current waveforms
+- Captures path dependence in battery aging
+- Identifies toxic load shapes
+- Predicts capacity fade and remaining useful life
+- Constructs a Safe vs Dangerous operating envelope
 
 ---
 
-##  Objectives
+## 🎯 Objectives
 
-* Replace **cycle counting** with **stress-based degradation modeling**
-* Learn degradation physics directly from data
-* Capture **path dependence** in battery aging
-* Combine **ML + Deep Learning + Physics constraints**
-* Provide **interpretable insights** for Battery Management Systems (BMS)
+- Replace cycle counting with stress-based degradation modeling
+- Learn degradation physics directly from data
+- Capture path dependence in lithium-ion aging
+- Combine ML, Deep Learning, and physics-informed constraints
+- Deliver interpretable insights for Battery Management Systems (BMS)
 
 ---
 
-##  Core Concept
+## 🧠 Core Concept: Stress as a Functional
 
-Battery degradation is modeled as a **functional**:
+Battery degradation is modeled as a functional:
 
-```
-D[I(t)] = ∫ f(I(t), dI/dt) dt
-```
+\[
+D[I(t)] = \int f(I(t), \frac{dI}{dt}) \, dt
+\]
 
 Where:
 
-* `I(t)` = current profile
-* `dI/dt` = current derivative (stress amplifier)
-* `D` = learned degradation / stress
+- **I(t)** → current profile  
+- **dI/dt** → current rate (stress amplifier)  
+- **D** → learned degradation / stress  
 
-This replaces heuristic models with **data-driven physics learning**.
+This replaces heuristic degradation models with **data-driven physics learning**.
 
 ---
 
-##  Repository Structure
+## 📁 Repository Structure
 
-```
 batteryguard-ai/
 │
 ├── data/
 │   ├── raw/
+│   │   └── battery_data.csv
+│   │
 │   ├── processed/
+│   │   ├── cycles.csv
+│   │   ├── stress_features.csv
+│   │   └── capacity_fade.csv
 │
 ├── preprocessing/
-│   ├── signal_cleaning.py
-│   ├── cycle_extraction.py
+│   ├── signal_cleaning.py          # smoothing, resampling
+│   ├── cycle_extraction.py         # cycle segmentation logic
+│   └── derivatives.py              # dI/dt computation
 │
 ├── features/
-│   ├── load_shape_features.py   # C1–C4
+│   └── load_shape_features.py      # C1–C4 (stress coefficients)
 │
 ├── models/
-│   ├── stress_deeponet.py
-│   ├── degradation_ml.py
-│   ├── anomaly_models.py
-│   ├── rul_models.py
+│   ├── degradation_ml.py           # LR, RF, SVR
+│   ├── anomaly_models.py           # Isolation Forest, clustering
+│   ├── rul_models.py               # ESC-based RUL
+│   └── stress_deeponet.py           # Neural Operator (core)
 │
 ├── xai/
 │   ├── shap_analysis.py
-│   ├── stress_attribution.py
+│   └── stress_attribution.py
 │
 ├── safety/
 │   ├── early_warning.py
-│   ├── risk_scoring.py
+│   └── risk_scoring.py
 │
 ├── analytics/
 │   ├── cell_pack_loss.py
-│   ├── reporting.py
+│   └── reporting.py
 │
 ├── chatbot/
-│   ├── assistant.py
+│   └── assistant.py
 │
-├── main.py
+├── app/
+│   └── streamlit_app.py             # Research dashboard
+│
+├── notebooks/
+│   └── green_ai_project.ipynb       # original (reference only)
+│
+├── main.py                          # full pipeline runner
 ├── config.yaml
-└── README.md  
+├── requirements.txt
+├── .gitignore
+└── README.md
 
-```
+
+
+
+Each module maps directly to a conceptual block in the modeling pipeline.
 
 ---
 
-##  Dataset Description
+## 📊 Dataset Description
 
-### Real Data (EV Lab)
+### Real Battery Data (EV Lab)
 
-Collected from battery test bench:
+Collected from a battery test bench:
 
-* Current (A)
-* Voltage (V)
-* Temperature (°C)
-* Capacity (Ah)
-* Time (timestamps)
-* Cycle number
-* Charge/Discharge status
+- Current (A)
+- Voltage (V)
+- Temperature (°C)
+- Capacity (Ah)
+- Time (timestamps)
+- Cycle number
+- Charge / Discharge state
 
 ### Synthetic Data (Fallback)
 
 Used when real data is incomplete:
 
-* Sinusoidal loads
-* Pulse currents
-* High-frequency noisy loads
-* Realistic fluctuating EV patterns
+- Sinusoidal loads
+- Pulsed current profiles
+- High-frequency noisy loads
+- Realistic EV driving patterns
 
 ---
 
-##  Data Preprocessing
+## 🔧 Data Preprocessing
 
-* Missing value handling
-* Time-series resampling
-* Cycle segmentation
-* Numerical differentiation (`dI/dt`)
-* Normalization & scaling
-* Capacity drop calculation
-
----
-
-##  Feature Engineering (Load Shape Toxicity)
-
-Each cycle is summarized using **four physically meaningful coefficients**:
-
-| Feature | Description | Interpretation         |   |                            |
-| ------- | ----------- | ---------------------- | - | -------------------------- |
-| C1      | mean(       | I                      | ) | Average stress level       |
-| C2      | mean(       | dI/dt                  | ) | Spike / fluctuation damage |
-| C3      | std(I)      | Oscillation amplitude  |   |                            |
-| C4      | sum(I²)/N   | Energy-weighted stress |   |                            |
-
-These features feed ML models and support interpretability.
+- Missing value handling
+- Time-series resampling
+- Cycle segmentation
+- Numerical differentiation (dI/dt)
+- Normalization & scaling
+- Capacity drop computation
 
 ---
 
-##  Exploratory Data Analysis (EDA)
+## ⚙️ Feature Engineering: Load Shape Toxicity
 
-Performed analyses include:
+Each cycle is summarized using four physically meaningful coefficients:
 
-* Correlation heatmaps
-* Stress vs capacity plots
-* Cycle-wise degradation trends
-* Cluster visualization
+| Feature | Definition | Interpretation |
+|------|-----------|---------------|
+| C1 | mean(I) | Average stress level |
+| C2 | mean(dI/dt) | Spike-induced damage |
+| C3 | std(I) | Oscillation amplitude |
+| C4 | mean(I²) | Energy-weighted stress |
 
-### Key Insight:
-
-> `dI/dt` correlates **more strongly** with degradation than energy throughput alone.
+These features power both ML models and interpretability analysis.
 
 ---
 
-##  Machine Learning Models
+## 📈 Exploratory Data Analysis (EDA)
 
-### Regression
+- Correlation heatmaps
+- Stress vs capacity plots
+- Cycle-wise degradation trends
+- Cluster visualization of load shapes
 
-Used to predict capacity loss (`ΔCapacity`):
+**Key Insight:**  
+Current derivative (dI/dt) correlates more strongly with degradation than
+energy throughput alone.
 
-* Linear Regression
-* Random Forest Regressor
-* Support Vector Regressor (SVR)
+---
+
+## 🤖 Machine Learning Models
+
+### Regression (Capacity Fade Prediction)
+
+- Linear Regression
+- Random Forest Regressor
+- Support Vector Regressor (SVR)
 
 ### Unsupervised Learning
 
-* KMeans clustering
-* Pattern discovery in load shapes
+- KMeans clustering
+- Pattern discovery in load shapes
 
 ---
 
-##  Deep Learning: Neural Operator (DeepONet)
+## 🧬 Deep Learning: Neural Operator (DeepONet)
 
 ### Why DeepONet?
 
-DeepONet is designed for:
+DeepONet is designed for **Function → Scalar mappings**, which exactly matches:
 
-> **Function → Scalar mappings**
-
-Exactly matching our problem:
-
-```
-I(t) → Stress / Degradation
-```
+\[
+I(t) \rightarrow \text{Stress / Degradation}
+\]
 
 ### Architecture
 
-* **Branch Network**: Learns current & derivative behavior
-* **Trunk Network**: Learns time dependence
-* **Elementwise product** + summation
+- **Branch Network**: Learns waveform & derivative behavior
+- **Trunk Network**: Learns time dependence
+- Elementwise product + summation
 
 ### Physics-Informed Loss
 
-```
-Loss = MSE + λ · mean((dI/dt)²)
-```
+\[
+\mathcal{L} = \text{MSE} + \lambda \cdot \mathbb{E}[(dI/dt)^2]
+\]
 
-Ensures:
-
-* Smoothness
-* Physical plausibility
-* Stability
+This enforces:
+- Smoothness
+- Physical plausibility
+- Numerical stability
 
 ---
 
-##  Stress & Safety Modeling
+## 🛡 Stress & Safety Modeling
 
 For each cycle:
 
-* Stress value is predicted
-* Equivalent Stress Cycle (ESC) is computed
-* Cycles are classified as:
+- Stress value is predicted
+- Equivalent Stress Cycles (ESC) computed
+- Cycles classified as:
+  - **Safe**
+  - **Dangerous**
 
-  *  Safe
-  *  Dangerous
-
-Thresholding uses percentile-based stress limits.
+Thresholds use percentile-based stress limits.
 
 ---
 
-##  AI Chatbot Interface
+## 💬 AI Chatbot Interface
 
-A lightweight analytics chatbot enables natural queries:
+A lightweight analytics chatbot enables natural-language queries:
 
 Examples:
-
-* `What is mean stress?`
-* `Which cycles are dangerous?`
-* `Show stress plot`
-* `Show cluster-wise statistics`
+- “What is the mean stress?”
+- “Which cycles are dangerous?”
+- “Show stress vs capacity plot”
+- “Cluster-wise statistics”
 
 Demonstrates AI-powered battery analytics.
 
 ---
 
-##  Tech Stack
+## 🌐 Streamlit Research Dashboard
 
-### Programming & Data
+An interactive dashboard allows:
 
-* Python
-* NumPy
-* Pandas
-* Matplotlib / Seaborn
+- Dataset upload
+- Stress visualization
+- Safe vs dangerous cycle identification
+- Capacity fade & RUL insights
 
-### Machine Learning
+Run locally:
 
-* Scikit-learn
-* Random Forest
-* SVR
-* KMeans
+```bash
+streamlit run app/streamlit_app.py
 
-### Deep Learning
 
-* PyTorch
-* Neural Operators (DeepONet)
+🧪 Tech Stack
 
-### AI / NLP
+Programming & Data
+Python, NumPy, Pandas
+Matplotlib, Seaborn
+Machine Learning
+Scikit-learn
+Random Forest, SVR, KMeans
+Deep Learning
+PyTorch
+Neural Operators (DeepONet)
+AI / NLP
+Rule-based chatbot
+GPT-style extensibility
 
-* Rule-based chatbot
-* GPT-style extensibility
+🔍 Key Findings
 
----
+Battery stress is path-dependent, not cycle-dependent
+High dI/dt causes disproportionate damage
+ESC outperforms raw cycle count
+Neural Operators learn degradation functionals effectively
+ML models identify toxic load shapes
 
-##  Key Findings
+🚀 Applications
 
-1. Battery stress is **path-dependent**, not cycle-dependent
-2. High `dI/dt` causes disproportionate damage
-3. ESC is more accurate than raw cycle count
-4. Neural Operators successfully learn degradation functionals
-5. ML models identify toxic load shapes
+EV Battery Management Systems (BMS)
+Smart charging optimization
+Energy storage systems
+Predictive maintenance
+Warranty & lifecycle estimation
+Safety envelope monitoring
 
----
+🔮 Future Work
 
-##  Applications
+Multi-physics coupling (thermal + electrochemical)
+Transformer-based sequence models
+Online BMS deployment
+Real-time stress-aware charging control
 
-* Electric Vehicle Battery Management Systems (BMS)
-* Smart charging optimization
-* Energy storage systems
-* Predictive maintenance
-* Warranty & lifecycle estimation
-* Safety envelope monitoring
+⭐ Final Note
 
----
+This project demonstrates a next-generation AI framework for
+lithium-ion battery degradation modeling by:
 
-##  Final Statement
+Learning degradation physics from data
+Modeling stress as a functional
+Integrating ML, DL, XAI, and analytics
 
-This project demonstrates a **next-generation AI framework** for lithium-ion battery degradation modeling by:
+**If you find this project useful, consider starring the repository.**
 
-* Learning degradation physics from data
-* Modeling stress as a functional
-* Integrating ML, DL, and AI analytics
 
-> **A practical step toward intelligent, safer, and longer-lasting battery systems.**
-
----
-
-##  Future Work
-
-* Multi-physics coupling (thermal + electrochemical)
-* Transformer-based sequence models
-* Online BMS deployment
-* Real-time stress-aware charging control
-
----
-
- If you find this project useful, consider starring the repository.
