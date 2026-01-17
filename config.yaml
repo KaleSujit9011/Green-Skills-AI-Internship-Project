@@ -1,0 +1,5 @@
+data:
+  raw_path: data/raw/battery_data.xlsx
+
+model:
+  stress_threshold_percentile: 90
